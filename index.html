@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartScale.it — IT-Tools für Ihr Business-Wachstum</title>
+    <meta name="description" content="Skalieren Sie smart. Wir zeigen Ihnen die besten IT-Tools für Ihr Unternehmen – kuratiert, getestet, provisionsfrei empfohlen." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .gradient-text {
+            background: linear-gradient(135deg, #007AFF 0%, #00D4FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -12px rgba(0,122,255,0.25);
+        }
+        .glow {
+            box-shadow: 0 0 40px -8px rgba(0,122,255,0.15);
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { animation: fadeUp 0.7s ease-out forwards; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate-fade-up { animation: none; opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+
+    <!-- ===== NAV ===== -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-lg border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2">
+                <span class="text-xl font-bold tracking-tight">Smart<span class="text-[#007AFF]">Scale</span><span class="text-white/40 font-normal">.it</span></span>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm text-white/60">
+                <a href="/#deals" class="hover:text-white transition">Top Deals</a>
+                <a href="/#kategorien" class="hover:text-white transition">Kategorien</a>
+                <a href="/" class="hover:text-white transition">Home</a>
+                <a href="/guide" class="hover:text-white transition">Guide</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="min-h-screen flex flex-col justify-center px-5 pt-24 pb-16 relative overflow-hidden">
+        <!-- Subtiles Hintergrund-Radial -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#007AFF]/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#007AFF]/3 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto w-full relative z-10">
+            <div class="max-w-3xl">
+                <span class="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-[#007AFF] bg-[#007AFF]/10 px-4 py-2 rounded-full mb-8 animate-fade-up">B2B · SaaS · Skalierung</span>
+                <h1 class="text-4xl sm:text-5xl md:text-7xl font-black leading-[1.05] tracking-tight animate-fade-up delay-1">
+                    Skalieren Sie <br class="hidden sm:block" /><span class="gradient-text">smart</span>.
+                </h1>
+                <p class="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-white mt-2 animate-fade-up delay-1">
+                    Die besten IT-Tools für Ihr Business.
+                </p>
+                <p class="text-base sm:text-lg text-white/40 max-w-xl mt-6 leading-relaxed animate-fade-up delay-2">
+                    Wir kuratieren, testen und vergleichen die leistungsstärksten SaaS-Lösungen für den deutschsprachigen Markt. Kein Marketing-Blabla – nur messbarer Mehrwert für Ihr Wachstum.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 mt-10 animate-fade-up delay-3">
+                    <a href="/#deals" class="inline-flex items-center justify-center gap-2 bg-[#007AFF] hover:bg-[#0066CC] text-white font-semibold px-8 py-4 rounded-xl transition-all duration-200 text-base">
+                        Top-Tools entdecken
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                    </a>
+                    <a href="/guide" class="inline-flex items-center justify-center gap-2 border border-white/10 hover:border-white/25 text-white/80 hover:text-white font-medium px-8 py-4 rounded-xl transition-all duration-200 text-base">
+                        Kostenlosen Guide laden
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TOP 3 DEALS ===== -->
+    <section id="deals" class="px-5 py-24">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs font-semibold tracking-[0.2em] uppercase text-[#007AFF]">High-Ticket</span>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mt-4">Unsere Top-3-Empfehlungen</h2>
+                <p class="text-white/40 text-lg max-w-xl mx-auto mt-4">
+                    Kuratiert nach Provision, Conversion und DACH-Relevanz.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+
+                <!-- HubSpot -->
+                <div class="card-hover bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8 flex flex-col glow">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-[#FF6600]/10 flex items-center justify-center text-lg font-bold text-[#FF6600]">H</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">HubSpot</h3>
+                            <p class="text-white/30 text-sm">CRM &amp; Vertriebsplattform</p>
+                        </div>
+                    </div>
+                    <div class="flex-1 space-y-4 text-sm text-white/60">
+                        <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                            <span>Provision</span>
+                            <span class="text-white font-semibold">30% recurring</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                            <span>Cookie</span>
+                            <span class="text-white font-semibold">30 Tage</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                            <span>Pro Kunde/Jahr</span>
+                            <span class="text-[#007AFF] font-bold">bis €10.800</span>
+                        </div>
+                    </div>
+                    <a href="/hubspot"
+                    </a>
+                </div>
+
+                <!-- Semrush -->
+                <div class="card-hover bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8 flex flex-col glow">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-[#FFB800]/10 flex items-center justify-center text-lg font-bold text-[#FFB800]">S</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">Semrush</h3>
+                            <p class="text-white/30 text-sm">Marketing &amp; SEO Suite</p>
+                        </div>
+                    </div>
+                    <div class="flex-1 space-y-4 text-sm text-white/60">
+                        <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                            <span>Provision</span>
+                            <span class="text-white font-semibold">40% → 20% recurring</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                            <span>Cookie</span>
+                            <span class="text-white font-semibold">30 Tage</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                            <span>Pro Kunde/Jahr</span>
+                            <span class="text-[#007AFF] font-bold">bis €1.200</span>
+                        </div>
+                    </div>
+                    <a href="/semrush"
+                    </a>
+                </div>
+
+                <!-- PandaDoc -->
+                <div class="card-hover bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8 flex flex-col glow">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-[#00BFA5]/10 flex items-center justify-center text-lg font-bold text-[#00BFA5]">P</div>
+                        <div>
+                            <h3 class="font-semibold text-lg">PandaDoc</h3>
+                            <p class="text-white/30 text-sm">Dokumenten &amp; eSignatur</p>
+                        </div>
+                    </div>
+                    <div class="flex-1 space-y-4 text-sm text-white/60">
+                        <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                            <span>Provision</span>
+                            <span class="text-white font-semibold">25–45% recurring</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                            <span>Cookie</span>
+                            <span class="text-white font-semibold">30–60 Tage</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                            <span>Pro Kunde/Jahr</span>
+                            <span class="text-[#007AFF] font-bold">bis €2.424</span>
+                        </div>
+                    </div>
+                    <a href="/pandadoc"
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== KATEGORIEN ===== -->
+    <section id="kategorien" class="px-5 py-24 border-t border-white/5">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs font-semibold tracking-[0.2em] uppercase text-[#007AFF]">Übersicht</span>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mt-4">Wonach suchen Sie?</h2>
+                <p class="text-white/40 text-lg max-w-xl mx-auto mt-4">
+                    Schnelleinstieg in die wichtigsten Software-Kategorien.
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                <a href="/kategorie/crm" class="group relative bg-white/[0.02] border border-white/[0.06] hover:border-[#007AFF]/40 rounded-xl p-6 transition-all duration-200">
+                    <div class="w-10 h-10 rounded-lg bg-[#007AFF]/10 flex items-center justify-center mb-4 group-hover:bg-[#007AFF]/20 transition">
+                        <svg class="w-5 h-5 text-[#007AFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-white mb-1">CRM &amp; Vertrieb</h3>
+                    <p class="text-sm text-white/40">HubSpot, Pipedrive, Salesforce</p>
+                </a>
+
+                <a href="/kategorie/marketing" class="group relative bg-white/[0.02] border border-white/[0.06] hover:border-[#007AFF]/40 rounded-xl p-6 transition-all duration-200">
+                    <div class="w-10 h-10 rounded-lg bg-[#007AFF]/10 flex items-center justify-center mb-4 group-hover:bg-[#007AFF]/20 transition">
+                        <svg class="w-5 h-5 text-[#007AFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-white mb-1">Marketing &amp; SEO</h3>
+                    <p class="text-sm text-white/40">Semrush, Ahrefs, Mailchimp</p>
+                </a>
+
+                <a href="/kategorie/automatisierung" class="group relative bg-white/[0.02] border border-white/[0.06] hover:border-[#007AFF]/40 rounded-xl p-6 transition-all duration-200">
+                    <div class="w-10 h-10 rounded-lg bg-[#007AFF]/10 flex items-center justify-center mb-4 group-hover:bg-[#007AFF]/20 transition">
+                        <svg class="w-5 h-5 text-[#007AFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-white mb-1">Automatisierung</h3>
+                    <p class="text-sm text-white/40">Make, Zapier, UiPath</p>
+                </a>
+
+                <a href="/kategorie/dokumente" class="group relative bg-white/[0.02] border border-white/[0.06] hover:border-[#007AFF]/40 rounded-xl p-6 transition-all duration-200">
+                    <div class="w-10 h-10 rounded-lg bg-[#007AFF]/10 flex items-center justify-center mb-4 group-hover:bg-[#007AFF]/20 transition">
+                        <svg class="w-5 h-5 text-[#007AFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-white mb-1">Dokumente &amp; eSignatur</h3>
+                    <p class="text-sm text-white/40">PandaDoc, DocuSign</p>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GUIDE TEASER ===== -->
+    <section id="guide" class="px-5 py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#007AFF]/5 to-transparent pointer-events-none"></div>
+        <div class="max-w-3xl mx-auto text-center relative z-10">
+            <span class="text-xs font-semibold tracking-[0.2em] uppercase text-[#007AFF]">Kostenlos</span>
+            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mt-4">
+                Der SmartScale-Guide 2026
+            </h2>
+            <p class="text-white/40 text-lg max-w-xl mx-auto mt-4">
+                Drei Tools. Ein Stack. Ihr Wachstum. Jetzt kostenlos herunterladen.
+            </p>
+
+            <div class="max-w-md mx-auto mt-10">
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="email" placeholder="Ihre E-Mail-Adresse" class="flex-1 bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 outline-none focus:border-[#007AFF]/50 transition text-sm" />
+                    <button class="bg-[#007AFF] hover:bg-[#0066CC] text-white font-semibold px-6 py-4 rounded-xl transition text-sm whitespace-nowrap">
+                        Guide erhalten
+                    </button>
+                </div>
+                <p class="text-xs text-white/20 mt-3">Kein Spam. Jederzeit abbestellbar.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="border-t border-white/5 px-5 py-12">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-sm text-white/30">
+                &copy; 2026 SmartScale.it
+            </div>
+            <div class="flex items-center gap-6 text-sm text-white/30">
+                <a href="/impressum" class="hover:text-white/60 transition">Impressum</a>
+                <a href="/datenschutz" class="hover:text-white/60 transition">Datenschutz</a>
+                <a href="/kontakt" class="hover:text-white/60 transition">Kontakt</a>
+            </div>
+            <div class="text-xs text-white/10">
+                <span class="text-white/5">* Affiliate-Links. Bei Kauf erhalten wir eine Provision.</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
