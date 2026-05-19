@@ -1,0 +1,141 @@
+---
+import { getCollection } from 'astro:content'
+import { marked } from 'marked'
+
+export async function getStaticPaths() {
+  const tools = await getCollection('tools')
+  return tools
+    .filter(t => !t.data.draft)
+    .map(tool => ({
+      params: { slug: tool.slug || tool.id },
+      props: { tool },
+    }))
+}
+
+const { tool } = Astro.props
+const data = tool.data
+const htmlContent = marked(tool.body || '')
+
+const jsonLd = {
+  '@type': 'Product',
+  name: data.toolName,
+  description: data.description,
+  url: data.officialUrl,
+  ...(data.rating && {
+    aggregateRating: { '@type': 'AggregateRating', ratingValue: data.rating, bestRating: 5 },
+  }),
+}
+---
+
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{data.title}</title>
+    <meta name="description" content={data.description} />
+    <link rel="canonical" href={`https://smartscale.it/tools/${tool.slug || tool.id}`} />
+    <meta property="og:title" content={data.title} />
+    <meta property="og:description" content={data.description} />
+    <meta property="og:type" content="article" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        { '@type': 'WebSite', '@id': 'https://smartscale.it/#website', url: 'https://smartscale.it', name: 'smartscale.it' },
+        { '@type': 'Organization', '@id': 'https://smartscale.it/#organization', name: 'smartscale.it', url: 'https://smartscale.it' },
+        jsonLd,
+      ],
+    })} />
+  </head>
+  <body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col antialiased">
+    <header class="border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md z-50">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <a href="/" class="text-xl font-bold tracking-tight">
+            <span class="text-blue-600 dark:text-blue-400">smart</span>scale<span class="text-blue-600 dark:text-blue-400">.it</span>
+          </a>
+          <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+            <a href="/news/" class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">News</a>
+            <a href="/tools/" class="text-zinc-900 dark:text-zinc-100 font-semibold">Tools</a>
+            <a href="/vergleiche/" class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">Vergleiche</a>
+            <a href="/tutorials/" class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">Tutorials</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 py-12">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="text-sm text-zinc-500 dark:text-zinc-500 mb-8">
+          <a href="/" class="hover:text-zinc-700 dark:hover:text-zinc-300">Startseite</a>
+          <span class="mx-2">/</span>
+          <a href="/tools/" class="hover:text-zinc-700 dark:hover:text-zinc-300">Tools</a>
+          <span class="mx-2">/</span>
+          <span class="text-zinc-700 dark:text-zinc-300">{data.toolName}</span>
+        </nav>
+
+        <article>
+          <header class="mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">{data.title}</h1>
+            <p class="text-lg text-zinc-600 dark:text-zinc-400 mb-4">{data.description}</p>
+            <div class="flex flex-wrap items-center gap-4 text-sm text-zinc-500 dark:text-zinc-500">
+              {data.rating && (
+                <span class="text-amber-500 font-mono">
+                  {'★'.repeat(Math.round(data.rating))}{'☆'.repeat(5 - Math.round(data.rating))}
+                  <span class="text-zinc-500 dark:text-zinc-500 ml-1">{data.rating}/5</span>
+                </span>
+              )}
+              {data.pricing && (
+                <span class="px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 text-xs font-medium">
+                  {data.pricing === 'freemium' ? 'Freemium' : data.pricing === 'free' ? 'Kostenlos' : 'Kostenpflichtig'}
+                </span>
+              )}
+            </div>
+          </header>
+
+          {data.officialUrl && (
+            <div class="text-center my-8">
+              <a href={data.officialUrl} rel="nofollow sponsored" target="_blank"
+                 class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-xl transition-colors">
+                {data.toolName} besuchen →
+              </a>
+            </div>
+          )}
+
+          <div class="prose dark:prose-invert max-w-none" set:html={htmlContent} />
+
+          {data.faq && data.faq.length > 0 && (
+            <div class="mt-12 pt-8 border-t border-zinc-200 dark:border-zinc-800">
+              <h2 class="text-2xl font-bold mb-6">Häufige Fragen</h2>
+              <div class="space-y-6">
+                {data.faq.map(f => (
+                  <div>
+                    <h3 class="text-lg font-semibold mb-2">{f.question}</h3>
+                    <p class="text-zinc-600 dark:text-zinc-400">{f.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {data.sources && data.sources.length > 0 && (
+            <div class="mt-8 pt-6 border-t border-zinc-200 dark:border-zinc-800">
+              <h3 class="text-sm font-semibold text-zinc-500 dark:text-zinc-500 mb-2">Quellen</h3>
+              <ul class="text-sm text-zinc-500 dark:text-zinc-500 space-y-1">
+                {data.sources.map(source => (
+                  <li><a href={source} target="_blank" rel="nofollow" class="hover:underline break-all">{source}</a></li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </article>
+      </div>
+    </main>
+
+    <footer class="border-t border-zinc-200 dark:border-zinc-800 py-12">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-zinc-500 dark:text-zinc-500">
+        © 2025 smartscale.it
+      </div>
+    </footer>
+  </body>
+</html>

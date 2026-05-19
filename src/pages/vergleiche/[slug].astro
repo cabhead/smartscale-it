@@ -1,0 +1,90 @@
+---
+import { getCollection } from 'astro:content'
+import { marked } from 'marked'
+
+export async function getStaticPaths() {
+  const vergleiche = await getCollection('vergleiche')
+  return vergleiche
+    .filter(v => !v.data.draft)
+    .map(v => ({
+      params: { slug: v.slug || v.id },
+      props: { vergleich: v },
+    }))
+}
+
+const { vergleich } = Astro.props
+const data = vergleich.data
+const htmlContent = marked(vergleich.body || '')
+---
+
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{data.title}</title>
+    <meta name="description" content={data.description} />
+    <link rel="canonical" href={`https://smartscale.it/vergleiche/${vergleich.slug || vergleich.id}`} />
+    <meta property="og:title" content={data.title} />
+    <meta property="og:description" content={data.description} />
+    <meta property="og:type" content="article" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col antialiased">
+    <header class="border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md z-50">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <a href="/" class="text-xl font-bold tracking-tight">
+            <span class="text-blue-600 dark:text-blue-400">smart</span>scale<span class="text-blue-600 dark:text-blue-400">.it</span>
+          </a>
+          <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+            <a href="/news/" class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">News</a>
+            <a href="/tools/" class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">Tools</a>
+            <a href="/vergleiche/" class="text-zinc-900 dark:text-zinc-100 font-semibold">Vergleiche</a>
+            <a href="/tutorials/" class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">Tutorials</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 py-12">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="text-sm text-zinc-500 dark:text-zinc-500 mb-8">
+          <a href="/" class="hover:text-zinc-700 dark:hover:text-zinc-300">Startseite</a>
+          <span class="mx-2">/</span>
+          <a href="/vergleiche/" class="hover:text-zinc-700 dark:hover:text-zinc-300">Vergleiche</a>
+          <span class="mx-2">/</span>
+          <span class="text-zinc-700 dark:text-zinc-300">{data.title}</span>
+        </nav>
+
+        <article>
+          <header class="mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">{data.title}</h1>
+            <p class="text-lg text-zinc-600 dark:text-zinc-400">{data.description}</p>
+          </header>
+
+          <div class="prose dark:prose-invert max-w-none" set:html={htmlContent} />
+
+          {data.faq && data.faq.length > 0 && (
+            <div class="mt-12 pt-8 border-t border-zinc-200 dark:border-zinc-800">
+              <h2 class="text-2xl font-bold mb-6">Häufige Fragen</h2>
+              <div class="space-y-6">
+                {data.faq.map(f => (
+                  <div>
+                    <h3 class="text-lg font-semibold mb-2">{f.question}</h3>
+                    <p class="text-zinc-600 dark:text-zinc-400">{f.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </article>
+      </div>
+    </main>
+
+    <footer class="border-t border-zinc-200 dark:border-zinc-800 py-12">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-zinc-500 dark:text-zinc-500">
+        © 2025 smartscale.it
+      </div>
+    </footer>
+  </body>
+</html>
