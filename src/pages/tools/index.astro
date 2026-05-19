@@ -1,0 +1,57 @@
+---
+// Tools listing page
+const pageTitle = 'KI-Tools — Alle Bewertungen | smartscale.it'
+const pageDesc = 'Alle KI-Tool-Bewertungen auf smartscale.it. Unabhängig getestet mit Vor- und Nachteilen, Preisen und Empfehlungen.'
+---
+
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <link rel="canonical" href="https://smartscale.it/tools/" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col">
+    <header class="border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md z-50">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <a href="/" class="text-xl font-bold tracking-tight">
+            <span class="text-blue-600 dark:text-blue-400">smart</span>scale<span class="text-blue-600 dark:text-blue-400">.it</span>
+          </a>
+          <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+            <a href="/news/" class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">News</a>
+            <a href="/tools/" class="text-zinc-900 dark:text-zinc-100 font-semibold">Tools</a>
+            <a href="/vergleiche/" class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">Vergleiche</a>
+            <a href="/tutorials/" class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">Tutorials</a>
+            <a href="/agents/" class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">Agenten</a>
+            <a href="/lexikon/" class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">Lexikon</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">KI-Tools</h1>
+        <p class="text-lg text-zinc-600 dark:text-zinc-400 mb-12 max-w-2xl">
+          Unabhängige Bewertungen der besten KI-Tools. Mit Vor- und Nachteilen, Preisen und Empfehlungen.
+        </p>
+        <div class="text-center py-20 text-zinc-500 dark:text-zinc-500">
+          <p class="text-lg">Tool-Bewertungen kommen bald.</p>
+          <p class="text-sm mt-2">Wir arbeiten daran — schau später nochmal vorbei.</p>
+        </div>
+      </div>
+    </main>
+
+    <footer class="border-t border-zinc-200 dark:border-zinc-800 py-12">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-zinc-500 dark:text-zinc-500">
+        © 2025 smartscale.it
+      </div>
+    </footer>
+  </body>
+</html>

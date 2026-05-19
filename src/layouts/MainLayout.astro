@@ -1,0 +1,122 @@
+---
+import { siteConfig } from '../config/site'
+
+interface Props {
+  title?: string
+  description?: string
+  canonicalUrl?: string
+  ogType?: 'website' | 'article'
+  ogImage?: string
+  noindex?: boolean
+  jsonLd?: object
+}
+
+const {
+  title,
+  description = siteConfig.description,
+  canonicalUrl = new URL(Astro.url.pathname, siteConfig.url).toString(),
+  ogType = 'website',
+  ogImage,
+  noindex = false,
+  jsonLd,
+} = Astro.props
+
+const pageTitle = title
+  ? `${title} | ${siteConfig.name}`
+  : `${siteConfig.name} – ${siteConfig.tagline}`
+
+// Base JSON-LD: WebSite + Organization (on every page)
+const baseJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${siteConfig.url}/#website`,
+      url: siteConfig.url,
+      name: siteConfig.name,
+      description: siteConfig.description,
+      inLanguage: siteConfig.lang,
+      publisher: {
+        '@id': `${siteConfig.url}/#organization`,
+      },
+    },
+    {
+      '@type': 'Organization',
+      '@id': `${siteConfig.url}/#organization`,
+      name: siteConfig.name,
+      url: siteConfig.url,
+      description: siteConfig.description,
+      foundingDate: siteConfig.foundingDate,
+      inLanguage: siteConfig.lang,
+    },
+  ],
+}
+
+// Merge page-specific JSON-LD if provided
+const finalJsonLd = jsonLd
+  ? { ...baseJsonLd, '@graph': [...baseJsonLd['@graph'], jsonLd] }
+  : baseJsonLd
+---
+
+<!doctype html>
+<html lang={siteConfig.lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:locale" content={siteConfig.locale} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="de" href={canonicalUrl} />
+    <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name} RSS`} href="/rss.xml" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(finalJsonLd)} />
+
+    <!-- Dark mode flash prevention -->
+    <script is:inline>
+      ;(function () {
+        const stored = localStorage.getItem('theme')
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (stored === 'dark' || (!stored && prefersDark)) {
+          document.documentElement.classList.add('dark')
+        }
+      })()
+    </script>
+  </head>
+  <body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col antialiased">
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <!-- Cloudflare Web Analytics -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "0d1834ac2f474b3cb78583e74a89a2b2"}'></script>
+  </body>
+</html>
