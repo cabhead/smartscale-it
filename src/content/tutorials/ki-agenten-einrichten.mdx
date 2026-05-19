@@ -1,0 +1,104 @@
+---
+title: "KI-Agenten einrichten — Von Chatbot zu autonomer KI"
+description: "Wie du aus einem normalen KI-Chatbot einen autonomen KI-Agenten machst. Mit Claude Code, OpenClaw und eigenen Workflows."
+slug: "ki-agenten-einrichten"
+category: "tutorial"
+tags: ["Tutorial", "KI-Agent", "Claude Code", "OpenClaw", "Automatisierung"]
+publishedAt: "2026-05-19"
+author: "smartscale Redaktion"
+reviewedBy: "smartscale Redaktion"
+faq:
+  - question: "Was brauche ich, um einen KI-Agenten einzurichten?"
+    answer: "Für Claude Code: Einen Anthropic-API-Key und ein Terminal. Für OpenClaw: Einen lokalen Computer mit Python. Für No-Code-Agenten: Einen Zapier- oder n8n-Account mit KI-Integration."
+  - question: "Sind KI-Agenten sicher?"
+    answer: "KI-Agenten können Fehler machen. Immer überwachen, Berechtigungen einschränken und Ergebnisse prüfen. Starte mit einfachen Aufgaben und steigere dich langsam."
+---
+
+## Von Chatbot zu KI-Agent
+
+Ein normaler Chatbot antwortet auf Fragen. Ein KI-Agent kann **eigenständig Aufgaben erledigen**. In diesem Tutorial zeigen wir dir, wie du einen KI-Agenten einrichtest.
+
+## Option 1: Claude Code (für Entwickler)
+
+Claude Code ist ein Terminal-Agent von Anthropic, der als autonomer Entwickler arbeitet.
+
+### Installation
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+### API-Key setzen
+
+```bash
+export ANTHROPIC_API_KEY="dein-api-key"
+```
+
+### Claude Code starten
+
+```bash
+claude
+```
+
+### Erste Aufgabe
+
+Gib Claude Code eine Aufgabe:
+
+```
+Erstelle eine Python-Funktion, die eine CSV-Datei einliest und die Summe einer bestimmten Spalte berechnet.
+```
+
+Claude Code wird:
+1. Die Aufgabe analysieren
+2. Die Funktion schreiben
+3. Tests erstellen
+4. Die Funktion ausführen und das Ergebnis zeigen
+
+## Option 2: OpenClaw (für alle)
+
+OpenClaw ist ein Open-Source-KI-Agent, der lokal auf deinem Computer läuft.
+
+### Installation
+
+```bash
+pip install openclaw
+```
+
+### Konfiguration
+
+Erstelle eine `config.yaml`:
+
+```yaml
+model: claude-sonnet-4
+tools:
+  - web_search
+  - file_read
+  - file_write
+  - shell
+```
+
+### OpenClaw starten
+
+```bash
+openclaw
+```
+
+### Erste Aufgabe
+
+```
+Recherchiere die neuesten KI-Tools für Bildgenerierung und erstelle eine Übersicht als Markdown-Datei.
+```
+
+## Option 3: n8n + KI (No-Code)
+
+Für Nicht-Entwickler: n8n mit KI-Integration.
+
+1. Erstelle einen neuen Workflow in n8n.
+2. Füge einen "AI Agent" Knoten hinzu.
+3. Konfiguriere das Modell (OpenAI, Claude, etc.).
+4. Gib dem Agenten ein Ziel und verfügbare Tools.
+5. Aktiviere den Workflow.
+
+## Fazit
+
+KI-Agenten sind mächtiger als normale Chatbots. Starte mit einfachen Aufgaben, lerne die Grenzen kenne und steigere dich langsam. Claude Code ist ideal für Entwickler, OpenClaw für technisch Interessierte, n8n für No-Code-Nutzer.

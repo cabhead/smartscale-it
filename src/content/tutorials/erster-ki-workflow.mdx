@@ -1,0 +1,68 @@
+---
+title: "Dein erster KI-Workflow — Automatisierung für Einsteiger"
+description: "In diesem Tutorial lernst du, deinen ersten KI-Workflow zu erstellen — ohne Programmierkenntnisse. Schritt für Schritt mit n8n."
+slug: "erster-ki-workflow"
+category: "tutorial"
+tags: ["Tutorial", "n8n", "Automatisierung", "KI-Workflow", "Einsteiger"]
+publishedAt: "2026-05-19"
+author: "smartscale Redaktion"
+reviewedBy: "smartscale Redaktion"
+faq:
+  - question: "Brauche ich Programmierkenntnisse für KI-Workflows?"
+    answer: "Nein. Tools wie n8n, Zapier und Make bieten visuelle Editoren, mit denen du Workflows per Drag & Drop erstellen kannst. Programmierkenntnisse helfen bei komplexen Workflows, sind aber nicht nötig."
+  - question: "Welches Tool ist am besten für den Einstieg?"
+    answer: "Für Einsteiger: Zapier (einfachste Bedienung). Für technisch Interessierte: n8n (mehr Kontrolle, Open Source). Für den Mittelweg: Make (günstiger als Zapier, mächtiger)."
+---
+
+## Dein erster KI-Workflow
+
+In diesem Tutorial erstellen wir zusammen deinen ersten KI-Workflow: **Automatische Zusammenfassung von Webseiten per KI**.
+
+### Was wir brauchen
+
+- Ein kostenloses [n8n](https://n8n.io)-Account (Cloud-Version)
+- Einen [OpenAI](https://openai.com)-API-Key (oder nutze die n8n-eigene KI-Integration)
+
+### Schritt 1: n8n einrichten
+
+1. Gehe zu [n8n.io](https://n8n.io) und erstelle einen kostenlosen Account.
+2. Nach der Anmeldung siehst du das Workflow-Dashboard.
+3. Klicke auf "Add Workflow" und benenne ihn "Webseiten-Zusammenfassung".
+
+### Schritt 2: Trigger hinzufügen
+
+Der Trigger startet unser Workflow. Wir nutzen einen **Webhook-Trigger**:
+
+1. Klicke auf das "+"-Symbol und suche nach "Webhook".
+2. Wähle "Webhook" als Trigger.
+3. Setze den POST-Methode und kopiere die Webhook-URL.
+
+### Schritt 3: Webseite auslesen
+
+1. Füge einen neuen Knoten hinzu: "HTTP Request".
+2. Setze die URL auf den Wert aus dem Webhook (die URL der Webseite).
+3. Setze die Methode auf "GET".
+
+### Schritt 4: KI-Zusammenfassung
+
+1. füge einen "OpenAI" Knoten hinzu.
+2. Wähle "Chat" als Operation.
+3. Setze den Prompt auf: "Fasse den folgenden Text in 3 Sätzen zusammen: {{ $json.body }}"
+4. Verbinde den HTTP-Request-Knoten mit dem OpenAI-Knoten.
+
+### Schritt 5: Ergebnis zurückgeben
+
+1. Füge einen "Respond to Webhook" Knoten hinzu.
+2. Setze den Response Body auf das Ergebnis der KI.
+3. Verbinde alle Knoten und aktiviere den Workflow.
+
+### Fertig!
+
+Du hast jetzt einen funktionierenden KI-Workflow. Sende eine POST-Anfrage an die Webhook-URL mit einer Webseiten-URL im Body, und du bekommst eine KI-Zusammenfassung zurück.
+
+### Nächste Schritte
+
+- Automatisiere den Workflow mit einem Schedule-Trigger
+- Speichere die Zusammenfassungen in einer Datenbank
+- Erstelle eine E-Mail-Benachrichtigung bei neuen Zusammenfassungen
+- Kombiniere mit anderen Tools (Slack, Notion, Google Sheets)
