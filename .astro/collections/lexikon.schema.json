@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "term": {
+      "type": "string"
+    },
+    "abbreviation": {
+      "type": "string"
+    },
+    "short": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Modelle",
+        "Technik",
+        "Konzepte",
+        "Tools",
+        "Agenten",
+        "Business"
+      ]
+    },
+    "related": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "$schema": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "term",
+    "short",
+    "category"
+  ]
+}

@@ -34,6 +34,6 @@ export const GET: APIRoute = async () => {
 </rss>`
 
   return new Response(xml, {
-    headers: { 'Content-Type:': 'application/rss+xml' },
+    headers: { 'Content-Type': 'application/rss+xml' },
   })
 }

@@ -47,7 +47,7 @@ Der Trigger startet unser Workflow. Wir nutzen einen **Webhook-Trigger**:
 
 1. füge einen "OpenAI" Knoten hinzu.
 2. Wähle "Chat" als Operation.
-3. Setze den Prompt auf: "Fasse den folgenden Text in 3 Sätzen zusammen: {{ $json.body }}"
+3. Setze den Prompt auf: "Fasse den folgenden Text in 3 Sätzen zusammen: \{\{ $json.body \}\}"
 4. Verbinde den HTTP-Request-Knoten mit dem OpenAI-Knoten.
 
 ### Schritt 5: Ergebnis zurückgeben
