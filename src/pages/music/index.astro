@@ -24,7 +24,7 @@ const pageDesc = "Dark Ambient & Cinematic Musik von DarkMindMusik. Instrumental
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 2rem 1rem;
+        padding: 1.5rem 1rem 2rem;
       }
       .container {
         width: 100%;
@@ -35,20 +35,33 @@ const pageDesc = "Dark Ambient & Cinematic Musik von DarkMindMusik. Instrumental
         gap: 1.5rem;
       }
       .avatar-wrap {
-        width: 140px;
-        height: 140px;
-        border-radius: 50%;
+        margin-top: 1rem;
+        width: 80vw;
+        max-width: 540px;
+        aspect-ratio: 16 / 10;
+        border-radius: 24px;
         overflow: hidden;
-        border: 2px solid #2a2a4a;
-        box-shadow: 0 0 30px rgba(107, 127, 255, 0.15);
+        border: 1px solid #2a2a4a;
+        box-shadow: 0 4px 60px rgba(107, 127, 255, 0.12);
         position: relative;
       }
       .avatar-video {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 50%;
-        filter: brightness(0.9) contrast(1.05);
+        display: block;
+      }
+      .avatar-fade {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient(
+          to bottom,
+          transparent 50%,
+          rgba(10, 10, 15, 0.3) 70%,
+          rgba(10, 10, 15, 0.7) 85%,
+          rgba(10, 10, 15, 1) 100%
+        );
       }
       .name {
         font-size: 1.5rem;
@@ -155,9 +168,10 @@ const pageDesc = "Dark Ambient & Cinematic Musik von DarkMindMusik. Instrumental
     <div class="container">
       <!-- Avatar Video -->
       <div class="avatar-wrap">
-        <video class="avatar-video" autoplay muted loop playsinline poster="">
+        <video class="avatar-video" autoplay muted loop playsinline>
           <source src="https://ugc.production.linktr.ee/0b4d0fce-5bbb-45f3-85d3-aee01815e061_19.mp4" type="video/mp4">
         </video>
+        <div class="avatar-fade"></div>
       </div>
 
       <!-- Name -->
